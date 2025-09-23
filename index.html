@@ -3,25 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Empresa de limpiesa</title>
+    <title>ELLE Janitorial Services</title>
+    <link rel="stylesheet" href="private/css/index.css" />
   </head>
   <body>
-    <div id="header-container"></div>
-    <main></main>
-    <footer></footer>
+    <div id="header-container" class="divheader"></div>
+    <main>
+        <div class="acordeon">
+            <div class="item">
+                <button class="titulo" style="background-image: url('./assets/img/HouseCleaning.jpg');">House Cleaning</button>
+                <div class="contenido">
+                    <p>Experience the luxury of a clean and organized home with our expert house cleaning service. Our skilled professionals will sweep, scrub, and tidy every inch of your space, leaving it refreshed and inviting.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="footer-container" class="divfooter"></div>
   </body>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script>
-    function includeHTML(containerId, filePath) {
-      fetch(filePath)
-        .then((response) => response.text())
-        .then((html) => {
-          document.getElementById(containerId).innerHTML = html;
-        });
-    }
-
-    // Cargar el header y el footer
-    includeHTML("header-container", "./views/partials/header.html");
-    //includeHTML("footer-container", "views/partials/footer.html");
-  </script>
+  <script src="private/js/index.js"></script>
 </html>
