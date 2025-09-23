@@ -1,0 +1,1 @@
+esta carpeta debera contener archivos de imagen
