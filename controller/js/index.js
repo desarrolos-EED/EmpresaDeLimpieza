@@ -1,0 +1,1 @@
+//creacion de javascript para el index
