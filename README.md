@@ -9,4 +9,5 @@ Proyecto colaborativo para empresa de limpieza en EEAA
 - Javascript
 
 ### Instalación
-```bash git clone https://github.com/desarrolos-EED/EmpresaDeLimpieza.git
+```bash
+git clone https://github.com/desarrolos-EED/EmpresaDeLimpieza.git
