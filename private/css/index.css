@@ -1,38 +1,185 @@
 body {
     font-family: Arial, sans-serif;
     background: #e1e1e1;
+    background-image: url('../../assets/img/ELLE_justLogo.png');
+    background-size: auto;
+    background-position: bottom;
+    opacity: 0.9;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    background-color: #ffffff94;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.255);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+.aboutUs {
+    font-family: "Rubik", sans-serif;
+    background-color: #f4f4f4;
+    padding: 45px 45px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 45px auto;
+    width: 80%;
+}
+
+h1 {
+    text-align: center;
+    /* display: block; Redundante, ya que los elementos <h1> son block por defecto */
+    font-size: 2em;
+    margin-block-start: -0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bolder;
+    unicode-bidi: isolate;
+}
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin-block-start: -0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bolder;
+    unicode-bidi: isolate;
+}
+
+p{ 
+    font-size: 20px;
+    text-align: justify;
+    margin: 15px 0;
+}
+
+.location {
+    font-weight: bold !important;
+    font-size: 22px !important;
+    justify-self: anchor-center !important;
+}
+
+.acordeon {
+    width: 80%;
+    margin: 50px auto;
+    color: black;
+    background-color: white;
+    padding: 45px 45px;
+    border-radius: 15px;
+}
+
+.acordeon .contenedor {
+    position: relative;
+    margin: 10px 10px;
+    transition: all 0.3s ease;
+}
+
+.acordeon .etiqueta {
+    position: relative;
+    padding: 10px 0;
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+}
+
+.acordeon .etiqueta::before {
+    content: "+";
+    color: black;
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    font-size: 30px;
+    transform: translateY(-50%);
+}
+
+.acordeon .contenido {
+    position: relative;
+    background: white;
+    text-align: justify;
+    max-height: 0; /* Inicialmente colapsado */
+    font-size: 20px;
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* Transición suave */
+}
+
+.acordeon hr {
+    width: 100; /* Falta unidad (por ejemplo, px o %) */
+    margin-left: 0;
+    border: 1px solid grey;
+}
+
+.acordeon .contenedor.activa .contenido {
+    max-height: 500px; /* Altura máxima al expandir (ajusta según tu contenido) */
+    /* width: 100%; Redundante, ya que el contenedor padre ya establece el ancho */
+    /* transform: scale(1); Redundante, ya que scale(1) no tiene efecto visible */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Crea dos columnas de igual tamaño */
+    gap: 20px;
+}
+
+.acordeon .contenedor.activa .etiqueta::before {
+    content: "-";
+    font-size: 30px;
+}
+
+.acordeon .contenedor .imagen,
+.acordeon .contenedor .texto {
+    opacity: 0; /* Ocultar inicialmente */
+    transform: scale(0.5); /* Reducir ligeramente el tamaño al estar oculto */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transición suave para opacidad y escala */
+}
+
+.imagen img {
+    width: 100%;
+    height: auto;
+}
+
+.acordeon .contenedor.activa .imagen,
+.acordeon .contenedor.activa .texto {
+    opacity: 1; /* Mostrar al activar el contenedor */
+    transform: scale(1); /* Restaurar el tamaño original */
+    align-content: center;
 }
 
 .menu-horizontal {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 10px 10px 10px 0;
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
     justify-content: flex-end;
 }
 
 .menu-horizontal li a {
     display: block;
-    padding: 10px 15px; 
-    text-decoration: none; 
-    color: #333; 
-    background-color: #f4f4f43c; 
-    margin-right: 5px; 
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f4f4f43c;
+    margin-right: 5px;
+    border-radius: 15px;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    align-content: center;
 }
 
 .menu-horizontal li a:hover {
-    background-color: #f3ffb9b8; 
+    color: #08e200;
+    background-color: #f3ffb9b8;
 }
 
-.divheader{
+.divheader {
     text-align: center;
     color: #777;
     height: 20px;
 }
 
-.divfooter{
+.divfooter {
     text-align: center;
     font-size: 12px;
     color: #777;
@@ -41,7 +188,7 @@ body {
 }
 
 .titulo {
-    color: #fff; 
+    color: #fff;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -50,40 +197,64 @@ body {
     outline: none;
     font-size: 16px;
     background-size: cover;
-    background-position: center;  
-    background-repeat: no-repeat; 
-    transition: all 0.4s ease; 
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.4s ease;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .titulo::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); 
-    z-index: 1; 
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
     transition: background-color 0.4s ease;
 }
 
-.titulo span { 
+.titulo span {
     position: relative;
-    z-index: 2; 
+    z-index: 2;
 }
 
-.titulo:hover::before, .titulo.activo::before {
-    background-color: rgba(0, 0, 0, 0.6); 
+.titulo:hover::before,
+.titulo.activo::before {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.titulo:hover, .titulo.activo {
+.titulo:hover,
+.titulo.activo {
     filter: brightness(0.9);
-    transform: scale(1.01); 
+    transform: scale(1.01);
 }
 
 .titulo span {
-    padding: 18px; 
-    display: block; 
+    padding: 18px;
+    display: block;
+}
+
+
+.contact {
+    width: 80%;
+    margin: 50px auto;
+    color: black;
+    background-color: white;
+    padding: 45px 45px;
+    border-radius: 15px;
+    display: flex
+
+}
+
+.contact-items {
+    width: 40%;
+    height: auto;
+}
+
+.contact-items h2{
+    text-align: left;
+    margin-left: 15px;
 }
