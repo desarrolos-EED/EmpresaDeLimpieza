@@ -39,6 +39,7 @@ h1 {
     margin-inline-end: 0px;
     font-weight: bolder;
     unicode-bidi: isolate;
+    align-content: center;
 }
 h2 {
     text-align: center;
@@ -257,4 +258,66 @@ p{
 .contact-items h2{
     text-align: left;
     margin-left: 15px;
+}
+
+.contactMe{
+    width: 80%;
+    margin: 50px auto;
+    color: black;
+    background-color: white;
+    padding: 45px 45px;
+    border-radius: 15px;
+    place-items: center;
+}
+
+
+.form-container{
+    height: 50%;
+    width: 50%;
+    align-items: center;
+}
+
+.form-group{
+    margin-bottom: 15px;
+    display: grid;
+    width: 100%;
+}
+
+.form-group .form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: center;
+    width: 40%; /* El tamaño del label será del 40% del ancho */
+}
+
+.form-group .form-input input,
+.form-group .form-input textarea{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none; /* Evita que el textarea sea redimensionable */
+    overflow: auto; /* Permite el scroll si el contenido excede el tamaño */
+}
+
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-sent{
+    background-color: #7000ba; /* Cambia el color de fondo al enviar */
+    margin-top: 10px;
 }
