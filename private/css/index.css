@@ -128,6 +128,8 @@ p{
     transition: max-height 0.5s ease; /* Transición suave */
 }
 
+
+
 .acordeon .contenedor.activa .contenido{
     padding: 10px;
     background-color: #f9f9f9; /* Fondo claro para diferenciarlo */
@@ -146,7 +148,13 @@ p{
     font-size: 18px; /* Tamaño de fuente ligeramente más pequeño */
     border-radius: 5px; /* Bordes redondeados */
     overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede el tamaño */
-    max-height: none; /* Permite que la altura se ajuste al total de los elementos */
+    max-height: 600px; /* Altura máxima al expandir */
+    transition: max-height 0.5s ease; /* Transición suave para retraer y expandir */
+}
+
+.acordeon .contenedor .sub-contenido {
+    max-height: 0; /* Inicialmente colapsado */
+    transition: max-height 0.5s ease; /* Transición suave para retraer y expandir */
 }
  
 .acordeon hr {
