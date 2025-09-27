@@ -87,6 +87,15 @@ p{
     cursor: pointer;
 }
 
+.acordeon .sub-etiqueta {
+    position: relative;
+    padding: 10px 0;
+    font-size: 25px;
+    color: black;
+    cursor: pointer;
+    justify-self: center;
+}
+
 .acordeon .etiqueta::before {
     content: "+";
     color: black;
@@ -108,8 +117,40 @@ p{
     transition: max-height 0.5s ease; /* Transición suave */
 }
 
+.acordeon .sub-contenido{
+    position: relative;
+    background: white;
+    text-align: justify;
+    max-height: 0; /* Inicialmente colapsado */
+    font-size: 20px;
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* Transición suave */
+}
+
+.acordeon .contenedor.activa .contenido{
+    padding: 10px;
+    background-color: #f9f9f9; /* Fondo claro para diferenciarlo */
+    border-left: 3px solid #ccc; /* Línea para destacar el sub-contenido */
+    margin: 10px 0; /* Espaciado entre sub-contenidos */
+    font-size: 18px; /* Tamaño de fuente ligeramente más pequeño */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede el tamaño */
+    max-height: 300px; /* Establece una altura máxima para el área desplazable */
+}
+
+.acordeon .contenedor.activa .sub-contenido{
+    padding: 10px;
+    background-color: #f9f9f9; /* Fondo claro para diferenciarlo */
+    margin: 10px 0; /* Espaciado entre sub-contenidos */
+    font-size: 18px; /* Tamaño de fuente ligeramente más pequeño */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede el tamaño */
+    max-height: none; /* Permite que la altura se ajuste al total de los elementos */
+}
+ 
 .acordeon hr {
-    width: 100; /* Falta unidad (por ejemplo, px o %) */
+    width: 100%; /* Falta unidad (por ejemplo, px o %) */
     margin-left: 0;
     border: 1px solid grey;
 }
