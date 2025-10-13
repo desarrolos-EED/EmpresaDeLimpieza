@@ -184,6 +184,10 @@ p{
     transition: opacity 0.5s ease, transform 0.5s ease; /* Transición suave para opacidad y escala */
 }
 
+.text{
+    padding-right: 20px;
+}
+
 .imagen img {
     width: 100%;
     height: auto;
@@ -369,4 +373,20 @@ textarea {
 .btn-sent{
     background-color: #7000ba; /* Cambia el color de fondo al enviar */
     margin-top: 10px;
+}
+
+.more-info{
+    background-color: #008CBA; /* Cambia el color de fondo al enviar */
+    margin-top: 10px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.more-info:hover {
+    background-color: #45a049;
 }
