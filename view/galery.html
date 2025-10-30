@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELLE Janitorial Services : Reviews</title>
+      <link rel="icon" type="image/png" href="../assets/img/ELLE_justLogo.png" />
+      <link rel="stylesheet" href="../private/css/style.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="header-container" class="header-row"></div>
+        <div class="body">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="../assets/img/HouseCleaning.jpg" alt="Limpieza de oficinas">
+                    <div class="caption">Limpieza de oficinas</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/HouseCleaning.jpg" alt="Servicio residencial">
+                    <div class="caption">Servicio residencial</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/img/HouseCleaning.jpg" alt="Limpieza profunda">
+                    <div class="caption">Limpieza profunda</div>
+                </div>
+            </div>
+            <style>
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+            .gallery-item {
+                width: 250px;
+                text-align: center;
+            }
+            .gallery-item img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+            .caption {
+                margin-top: 8px;
+                font-size: 1rem;
+                color: #333;
+            }
+            </style>
+            <!-- Modal Structure -->
+            <div id="imageModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center; flex-direction:column;">
+                <span id="closeModal" style="position:absolute; top:30px; right:50px; font-size:2rem; color:#fff; cursor:pointer;">&times;</span>
+                <img id="modalImg" src="" alt="Imagen ampliada" style="max-width:90vw; max-height:80vh; border-radius:10px; box-shadow:0 0 20px #000;">
+                <div id="modalCaption" style="color:#fff; text-align:center; margin-top:10px; font-size:1.2rem;"></div>
+            </div>
+        </div>
+        <div id="footer-container" class="divfooter"></div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://kit.fontawesome.com/f352c3a994.js" crossorigin="anonymous"></script>
+<script src="../private/js/views.js"></script>
+<script>
+$(document).ready(function() {
+    $('.gallery-item img').on('click', function() {
+        $('#modalImg').attr('src', $(this).attr('src'));
+        $('#modalCaption').text($(this).siblings('.caption').text());
+        $('#imageModal').css('display', 'flex');
+    });
+    $('#closeModal').on('click', function() {
+        $('#imageModal').hide();
+    });
+    $('#imageModal').on('click', function(e) {
+        if (e.target === this) {
+            $('#imageModal').hide();
+        }
+    });
+});
+</script>
+</html>

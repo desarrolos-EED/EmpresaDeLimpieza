@@ -11,8 +11,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: auto;
-    height: auto;
+    width: 100vw;
+    height: 100vh;
     background-color: #ffffff94;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.255);
 }
@@ -389,4 +389,22 @@ textarea {
 
 .more-info:hover {
     background-color: #45a049;
+}
+
+
+.reviewsDisplay{
+    width: 80%;
+    margin: 50px auto;
+    color: black;
+    background-color: white;
+    padding: 45px 45px;
+    border-radius: 15px;
+    place-items: center;
+}
+
+.header-row {
+    width: 100vw;
+    min-width: 100%;
+    display: flex;
+    justify-content: right;
 }
