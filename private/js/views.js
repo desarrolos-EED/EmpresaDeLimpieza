@@ -28,3 +28,39 @@ for (const item of acordeon) {
         }
     });
 }
+
+// Manejo de mensajes de éxito o error en el envío de reseñas
+function obtenerParametros() {
+    // 1. Obtener la URL actual
+    const url = new URL(window.location.href);
+    
+    // 2. Crear un objeto URLSearchParams a partir de la query string
+    const params = new URLSearchParams(url.search);
+
+    const parametrosCapturados = {};
+
+    // 3. Iterar sobre todos los parámetros y guardarlos
+    for (const [key, value] of params.entries()) {
+        parametrosCapturados[key] = value;
+    }
+
+    return parametrosCapturados;
+}
+
+const misParametros = obtenerParametros();
+
+if (misParametros.success) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Your review has been sent successfully.'
+    });
+}else{
+    if (misParametros.error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'There was an error sending your review. Please try again.'
+        });
+    }
+}

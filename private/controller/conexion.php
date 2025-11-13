@@ -15,8 +15,6 @@ try {
     // Configuración para reportar errores
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "¡Conexión a PostgreSQL exitosa!";
-
 } catch (PDOException $e) {
     // Si la conexión falla, se captura el error
     die("Error de conexión: " . $e->getMessage());

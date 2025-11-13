@@ -12,7 +12,7 @@
       <div id="header-container" class="header-row"></div>
       <div class="body">
         <div class="contactMe">
-          <form method="POST" action="./private/controller/php/reviews.php" class="form-container">
+          <form method="POST" action="../private/controller/reviews.php" class="form-container">
             <h1>Leave a Review</h1>
             <hr />
             <div class="form-group">
@@ -49,15 +49,15 @@
         <div class="reviewsDisplay" id="reviewsDisplay">
           <h1>Customer Reviews</h1>
           <hr />
-          <div id="reviewsContainer"></div>
+          <div id="reviewsContainer" class="reviewsContainer"></div>
         </div>
       </div>
       <div id="footer-container" class="divfooter"></div>
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script
-    src="https://kit.fontawesome.com/f352c3a994.js" crossorigin="anonymous"
-  ></script>
+  <script src="https://kit.fontawesome.com/f352c3a994.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../private/js/Reviews.js"></script>
   <script src="../private/js/views.js"></script>
 </html>

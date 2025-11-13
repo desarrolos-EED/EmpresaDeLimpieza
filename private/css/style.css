@@ -41,6 +41,7 @@ h1 {
     unicode-bidi: isolate;
     align-content: center;
 }
+
 h2 {
     text-align: center;
     font-size: 1.5em;
@@ -52,7 +53,7 @@ h2 {
     unicode-bidi: isolate;
 }
 
-p{ 
+p {
     font-size: 20px;
     text-align: justify;
     margin: 15px 0;
@@ -110,65 +111,88 @@ p{
     position: relative;
     background: white;
     text-align: justify;
-    max-height: 0; /* Inicialmente colapsado */
+    max-height: 0;
+    /* Inicialmente colapsado */
     font-size: 20px;
     width: 100%;
     overflow: hidden;
-    transition: max-height 0.5s ease; /* Transición suave */
+    transition: max-height 0.5s ease;
+    /* Transición suave */
 }
 
-.acordeon .sub-contenido{
+.acordeon .sub-contenido {
     position: relative;
     background: white;
     text-align: justify;
-    max-height: 0; /* Inicialmente colapsado */
+    max-height: 0;
+    /* Inicialmente colapsado */
     font-size: 20px;
     width: 100%;
     overflow: hidden;
-    transition: max-height 0.5s ease; /* Transición suave */
+    transition: max-height 0.5s ease;
+    /* Transición suave */
 }
 
 
 
-.acordeon .contenedor.activa .contenido{
+.acordeon .contenedor.activa .contenido {
     padding: 10px;
-    background-color: #f9f9f9; /* Fondo claro para diferenciarlo */
-    border-left: 3px solid #ccc; /* Línea para destacar el sub-contenido */
-    margin: 10px 0; /* Espaciado entre sub-contenidos */
-    font-size: 18px; /* Tamaño de fuente ligeramente más pequeño */
-    border-radius: 5px; /* Bordes redondeados */
-    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede el tamaño */
-    max-height: 300px; /* Establece una altura máxima para el área desplazable */
+    background-color: #f9f9f9;
+    /* Fondo claro para diferenciarlo */
+    border-left: 3px solid #ccc;
+    /* Línea para destacar el sub-contenido */
+    margin: 10px 0;
+    /* Espaciado entre sub-contenidos */
+    font-size: 18px;
+    /* Tamaño de fuente ligeramente más pequeño */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical si el contenido excede el tamaño */
+    max-height: 300px;
+    /* Establece una altura máxima para el área desplazable */
 }
 
-.acordeon .contenedor.activa .sub-contenido{
+.acordeon .contenedor.activa .sub-contenido {
     padding: 10px;
-    background-color: #f9f9f9; /* Fondo claro para diferenciarlo */
-    margin: 10px 0; /* Espaciado entre sub-contenidos */
-    font-size: 18px; /* Tamaño de fuente ligeramente más pequeño */
-    border-radius: 5px; /* Bordes redondeados */
-    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede el tamaño */
-    max-height: 600px; /* Altura máxima al expandir */
-    transition: max-height 0.5s ease; /* Transición suave para retraer y expandir */
+    background-color: #f9f9f9;
+    /* Fondo claro para diferenciarlo */
+    margin: 10px 0;
+    /* Espaciado entre sub-contenidos */
+    font-size: 18px;
+    /* Tamaño de fuente ligeramente más pequeño */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical si el contenido excede el tamaño */
+    max-height: 600px;
+    /* Altura máxima al expandir */
+    transition: max-height 0.5s ease;
+    /* Transición suave para retraer y expandir */
 }
 
 .acordeon .contenedor .sub-contenido {
-    max-height: 0; /* Inicialmente colapsado */
-    transition: max-height 0.5s ease; /* Transición suave para retraer y expandir */
+    max-height: 0;
+    /* Inicialmente colapsado */
+    transition: max-height 0.5s ease;
+    /* Transición suave para retraer y expandir */
 }
- 
+
 .acordeon hr {
-    width: 100%; /* Falta unidad (por ejemplo, px o %) */
+    width: 100%;
+    /* Falta unidad (por ejemplo, px o %) */
     margin-left: 0;
     border: 1px solid grey;
 }
 
 .acordeon .contenedor.activa .contenido {
-    max-height: 500px; /* Altura máxima al expandir (ajusta según tu contenido) */
+    max-height: 500px;
+    /* Altura máxima al expandir (ajusta según tu contenido) */
     /* width: 100%; Redundante, ya que el contenedor padre ya establece el ancho */
     /* transform: scale(1); Redundante, ya que scale(1) no tiene efecto visible */
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Crea dos columnas de igual tamaño */
+    grid-template-columns: 1fr 1fr;
+    /* Crea dos columnas de igual tamaño */
     gap: 20px;
 }
 
@@ -179,12 +203,15 @@ p{
 
 .acordeon .contenedor .imagen,
 .acordeon .contenedor .texto {
-    opacity: 0; /* Ocultar inicialmente */
-    transform: scale(0.5); /* Reducir ligeramente el tamaño al estar oculto */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Transición suave para opacidad y escala */
+    opacity: 0;
+    /* Ocultar inicialmente */
+    transform: scale(0.5);
+    /* Reducir ligeramente el tamaño al estar oculto */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    /* Transición suave para opacidad y escala */
 }
 
-.text{
+.text {
     padding-right: 20px;
 }
 
@@ -195,8 +222,10 @@ p{
 
 .acordeon .contenedor.activa .imagen,
 .acordeon .contenedor.activa .texto {
-    opacity: 1; /* Mostrar al activar el contenedor */
-    transform: scale(1); /* Restaurar el tamaño original */
+    opacity: 1;
+    /* Mostrar al activar el contenedor */
+    transform: scale(1);
+    /* Restaurar el tamaño original */
     align-content: center;
 }
 
@@ -300,7 +329,6 @@ p{
     padding: 45px 45px;
     border-radius: 15px;
     display: flex
-
 }
 
 .contact-items {
@@ -308,12 +336,12 @@ p{
     height: auto;
 }
 
-.contact-items h2{
+.contact-items h2 {
     text-align: left;
     margin-left: 15px;
 }
 
-.contactMe{
+.contactMe {
     width: 80%;
     margin: 50px auto;
     color: black;
@@ -324,13 +352,13 @@ p{
 }
 
 
-.form-container{
+.form-container {
     height: 50%;
     width: 50%;
     align-items: center;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 15px;
     display: grid;
     width: 100%;
@@ -340,11 +368,12 @@ p{
     font-weight: bold;
     margin-bottom: 5px;
     align-self: center;
-    width: 40%; /* El tamaño del label será del 40% del ancho */
+    width: 40%;
+    /* El tamaño del label será del 40% del ancho */
 }
 
 .form-group .form-input input,
-.form-group .form-input textarea{
+.form-group .form-input textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -354,8 +383,10 @@ p{
 }
 
 textarea {
-    resize: none; /* Evita que el textarea sea redimensionable */
-    overflow: auto; /* Permite el scroll si el contenido excede el tamaño */
+    resize: none;
+    /* Evita que el textarea sea redimensionable */
+    overflow: auto;
+    /* Permite el scroll si el contenido excede el tamaño */
 }
 
 
@@ -370,13 +401,15 @@ textarea {
     transition: background-color 0.3s ease;
 }
 
-.btn-sent{
-    background-color: #7000ba; /* Cambia el color de fondo al enviar */
+.btn-sent {
+    background-color: #7000ba;
+    /* Cambia el color de fondo al enviar */
     margin-top: 10px;
 }
 
-.more-info{
-    background-color: #008CBA; /* Cambia el color de fondo al enviar */
+.more-info {
+    background-color: #008CBA;
+    /* Cambia el color de fondo al enviar */
     margin-top: 10px;
     text-align: center;
     display: inline-block;
@@ -392,7 +425,7 @@ textarea {
 }
 
 
-.reviewsDisplay{
+.reviewsDisplay {
     width: 80%;
     margin: 50px auto;
     color: black;
@@ -407,4 +440,48 @@ textarea {
     min-width: 100%;
     display: flex;
     justify-content: right;
+}
+
+.reviewsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gallery-item {
+    width: 250px;
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.caption {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #333;
 }
