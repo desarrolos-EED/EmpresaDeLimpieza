@@ -7,17 +7,16 @@ body {
     opacity: 0.9;
 }
 
-.container {
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+.containerbody {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #ffffff94;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.255);
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
 
 .aboutUs {
     font-family: "Rubik", sans-serif;
@@ -27,36 +26,6 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 45px auto;
     width: 80%;
-}
-
-h1 {
-    text-align: center;
-    /* display: block; Redundante, ya que los elementos <h1> son block por defecto */
-    font-size: 2em;
-    margin-block-start: -0.5em;
-    margin-block-end: 0.5em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bolder;
-    unicode-bidi: isolate;
-    align-content: center;
-}
-
-h2 {
-    text-align: center;
-    font-size: 1.5em;
-    margin-block-start: -0.5em;
-    margin-block-end: 0.5em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bolder;
-    unicode-bidi: isolate;
-}
-
-p {
-    font-size: 20px;
-    text-align: justify;
-    margin: 15px 0;
 }
 
 .location {
@@ -74,161 +43,6 @@ p {
     border-radius: 15px;
 }
 
-.acordeon .contenedor {
-    position: relative;
-    margin: 10px 10px;
-    transition: all 0.3s ease;
-}
-
-.acordeon .etiqueta {
-    position: relative;
-    padding: 10px 0;
-    font-size: 30px;
-    color: black;
-    cursor: pointer;
-}
-
-.acordeon .sub-etiqueta {
-    position: relative;
-    padding: 10px 0;
-    font-size: 25px;
-    color: black;
-    cursor: pointer;
-    justify-self: center;
-}
-
-.acordeon .etiqueta::before {
-    content: "+";
-    color: black;
-    position: absolute;
-    top: 50%;
-    right: -5px;
-    font-size: 30px;
-    transform: translateY(-50%);
-}
-
-.acordeon .contenido {
-    position: relative;
-    background: white;
-    text-align: justify;
-    max-height: 0;
-    /* Inicialmente colapsado */
-    font-size: 20px;
-    width: 100%;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    /* Transición suave */
-}
-
-.acordeon .sub-contenido {
-    position: relative;
-    background: white;
-    text-align: justify;
-    max-height: 0;
-    /* Inicialmente colapsado */
-    font-size: 20px;
-    width: 100%;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    /* Transición suave */
-}
-
-
-
-.acordeon .contenedor.activa .contenido {
-    padding: 10px;
-    background-color: #f9f9f9;
-    /* Fondo claro para diferenciarlo */
-    border-left: 3px solid #ccc;
-    /* Línea para destacar el sub-contenido */
-    margin: 10px 0;
-    /* Espaciado entre sub-contenidos */
-    font-size: 18px;
-    /* Tamaño de fuente ligeramente más pequeño */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    overflow-y: auto;
-    /* Permite el desplazamiento vertical si el contenido excede el tamaño */
-    max-height: 300px;
-    /* Establece una altura máxima para el área desplazable */
-}
-
-.acordeon .contenedor.activa .sub-contenido {
-    padding: 10px;
-    background-color: #f9f9f9;
-    /* Fondo claro para diferenciarlo */
-    margin: 10px 0;
-    /* Espaciado entre sub-contenidos */
-    font-size: 18px;
-    /* Tamaño de fuente ligeramente más pequeño */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    overflow-y: auto;
-    /* Permite el desplazamiento vertical si el contenido excede el tamaño */
-    max-height: 600px;
-    /* Altura máxima al expandir */
-    transition: max-height 0.5s ease;
-    /* Transición suave para retraer y expandir */
-}
-
-.acordeon .contenedor .sub-contenido {
-    max-height: 0;
-    /* Inicialmente colapsado */
-    transition: max-height 0.5s ease;
-    /* Transición suave para retraer y expandir */
-}
-
-.acordeon hr {
-    width: 100%;
-    /* Falta unidad (por ejemplo, px o %) */
-    margin-left: 0;
-    border: 1px solid grey;
-}
-
-.acordeon .contenedor.activa .contenido {
-    max-height: 500px;
-    /* Altura máxima al expandir (ajusta según tu contenido) */
-    /* width: 100%; Redundante, ya que el contenedor padre ya establece el ancho */
-    /* transform: scale(1); Redundante, ya que scale(1) no tiene efecto visible */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Crea dos columnas de igual tamaño */
-    gap: 20px;
-}
-
-.acordeon .contenedor.activa .etiqueta::before {
-    content: "-";
-    font-size: 30px;
-}
-
-.acordeon .contenedor .imagen,
-.acordeon .contenedor .texto {
-    opacity: 0;
-    /* Ocultar inicialmente */
-    transform: scale(0.5);
-    /* Reducir ligeramente el tamaño al estar oculto */
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    /* Transición suave para opacidad y escala */
-}
-
-.text {
-    padding-right: 20px;
-}
-
-.imagen img {
-    width: 100%;
-    height: auto;
-}
-
-.acordeon .contenedor.activa .imagen,
-.acordeon .contenedor.activa .texto {
-    opacity: 1;
-    /* Mostrar al activar el contenedor */
-    transform: scale(1);
-    /* Restaurar el tamaño original */
-    align-content: center;
-}
-
 .menu-horizontal {
     list-style: none;
     padding: 0;
@@ -239,13 +53,13 @@ p {
 
 .menu-horizontal li a {
     display: block;
-    padding: 10px 15px;
+    padding: 5px;
     text-decoration: none;
     color: #333;
     background-color: #f4f4f43c;
     margin-right: 5px;
     border-radius: 15px;
-    width: 60px;
+    width: 100px;
     height: 30px;
     text-align: center;
     align-content: center;
@@ -484,4 +298,10 @@ textarea {
     margin-top: 8px;
     font-size: 1rem;
     color: #333;
+}
+
+
+.col-sm-12 .d-flex{
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -7,8 +7,10 @@ function includeHTML(containerId, filePath) {
 }
 
 // Cargar el header y el footer
-includeHTML("header-container", "./view/partials/header.html");
-includeHTML("footer-container", "./view/partials/footer.html");
+const BASE_PATH = "./view/partials/";
+
+includeHTML("header-container", `${BASE_PATH}header.html`);
+includeHTML("footer-container", `${BASE_PATH}footer.html`);
 
 const acordeon = document.getElementsByClassName("contenedor");
 
