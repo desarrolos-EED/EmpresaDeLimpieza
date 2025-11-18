@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 messageElement.textContent = "Message: " + review.message;
 
                 const timeElement = document.createElement('span');
-                timeElement.textContent = "Date time: " + review.timedate;
+                const date = new Date(review.timedate);
+                const formatted = date.toLocaleDateString('es-ES') + ' ' + date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                timeElement.textContent = "Date time: " + formatted;
 
                 reviewDiv.appendChild(nameElement);
                 reviewDiv.appendChild(messageElement);
