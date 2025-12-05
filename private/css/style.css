@@ -51,6 +51,10 @@ body {
     justify-content: flex-end;
 }
 
+.menu-horizontal li {
+    display: inline-block;
+}
+
 .menu-horizontal li a {
     display: block;
     padding: 5px;
@@ -304,4 +308,96 @@ textarea {
 .col-sm-12 .d-flex{
     display: flex;
     flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .menu-horizontal {
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    .menu-horizontal li {
+        margin-bottom: 20px;
+    }
+    .menu-horizontal li a {
+        padding: 8px;
+        width: 220px;
+        font-size: 24px;
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+        color: #333;
+        background-color: #f4f4f43c;
+        margin-right: 5px;
+        border-radius: 15px;
+        text-align: center;
+        align-content: center;
+    }
+    .menu-header{
+        justify-items: center;
+    }
+    
+    .aboutUs,
+    .acordeon,
+    .contact,
+    .contactMe,
+    .reviewsDisplay {
+        width: 90%;
+        padding: 20px;
+        margin: 30px auto;
+    }
+
+    .form-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .form-group .form-label {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .contact{
+        flex-direction: column;
+        margin: 50px auto;
+        color: black;
+        background-color: white;
+        padding: 45px 45px;
+        border-radius: 15px;
+        display: flex;
+    }
+
+    .contact-items {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .containerbody {
+        width: 100vw;
+    }
+    
+    p{
+        font-size: 14px;
+    }
+
+    .d-flex{
+        flex-direction: column;
+    }
+
+    .header-row {
+    width: 100vw;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.wrapper .wrapper-content .animated .fadeIn{
+    justify-self: anchor-center;
+    width: 90%;
+}
+
 }
