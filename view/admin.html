@@ -15,8 +15,9 @@
 </head>
 <body>
     <div class="container">
+        <div id="mesaje"></div>
         <h1 style="color: white;">Login</h1>
-        <form action="login.php" method="POST">
+        <form action="../private/controller/login.php" method="POST">
             <div class="form-group col-sm-6">
             <label for="user" class="form-label" style="color: white;">Username:</label>
             <div class="form-input">
@@ -33,5 +34,14 @@
             <button type="submit" class="btn btn-sent">Enter</button>
         </form>
     </div>
+    <script>
+        // Mostrar mensaje de error si existe en la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            const mesajeDiv = document.getElementById('mesaje');
+            mesajeDiv.innerHTML = `<div class="alert alert-danger" role="alert">${decodeURIComponent(error)}</div>`;
+        }
+    </script>
 </body>
 </html>

@@ -250,8 +250,8 @@ textarea {
 }
 
 .header-row {
-  width: 100vw;
-  min-width: 100%;
+  width: 95vw;
+  min-width: 95%;
   display: flex;
   justify-content: right;
 }
@@ -305,9 +305,14 @@ textarea {
   flex-wrap: wrap;
 }
 
+.menu-header{
+    margin-right: 15px;
+}
+
 @media (min-width: 0px) and (max-width: 700px) {
   .menu-header {
     justify-items: center;
+    margin-right: 0px;
   }
 
   .menu-horizontal {
@@ -376,7 +381,7 @@ textarea {
 
   .header-row {
     width: 100vw;
-    min-width: 100%;
+    min-width: 99%;
     display: flex;
     justify-content: center;
   }
