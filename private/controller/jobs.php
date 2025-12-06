@@ -2,29 +2,45 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar datos POST
-    $nombre = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS));
-    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-    // $mensaje = trim(filter_input(INPUT_POST, 'mensaje', FILTER_SANITIZE_SPECIAL_CHARS));
-    $mensaje = trim('Aplicación de trabajo recibida de ' . $nombre);
-
-    if (empty($nombre) || empty($email) || empty($mensaje)) {
+    $parametros = array(
+        "name" => isset($_POST['name']) ? trim(filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) : '',
+        "mail" => isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '',
+        "phone" => isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : ''
+    );
+    // Aquí puedes agregar la lógica para guardar los datos en la base de datos
+    
+    // Validar que los campos no estén vacíos
+    if(empty($parametros['name']) || empty($parametros['mail']) || empty($parametros['phone'])){
         die("Error: Todos los campos son obligatorios.");
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Error: Email inválido.");
+    // Validar formato de email
+    if(!filter_var($parametros['mail'], FILTER_VALIDATE_EMAIL)){
+        die("Error: El email no es válido.");
     }
 
-    // Validar archivo si existe
-    if (!empty($_FILES['archivo']['name'])) {
-        // validar tipo, tamaño, etc.
-    }
+    include './conexion.php';
+    try {
+        $sql = "select sp_insertJobs(:name, :mail, :phone)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':name', $parametros['name'], PDO::PARAM_STR);
+        $stmt->bindParam(':mail', $parametros['mail'], PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $parametros['phone'], PDO::PARAM_STR);
+        $stmt->execute();
 
-    include './sendmail.php';
-    $email = 'andinoduglas95@gmail.com'; // Destinatario fijo
-    $mensaje = 'Solicitud de empleo recibida de ' . $nombre . ' con email ' . $email;
-    enviarCorreo($email, $nombre, $mensaje);
-    // enviarCorreo();
-    // header("Location: ../../view/jobs.html");
+        $resultado_out = $stmt->fetchColumn();
+
+        if ($resultado_out && $resultado_out === 'true') {
+            header("Location: ../../view/jobs.html?success=true");
+            exit();
+        } else {
+            header("Location: ../../view/jobs.html?error=true");
+            exit();
+        }
+    } catch (PDOException $e) {
+        die("Error al enviar la reseña: " . $e->getMessage());
+    }
+    // Redirigir de vuelta a la página de ofertas de trabajo
+
 }
 ?>

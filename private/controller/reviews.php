@@ -1,13 +1,13 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)){
     $parametros = array(
-        "name" => isset($_POST['name']) ? trim(filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) : '',
+        "name" => isset($_POST['username']) ? trim(filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) : '',
         "mail" => isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '',
-        "message" => isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : ''
+        "password" => isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : ''
     );
 
     // Validar que los campos no estén vacíos
-    if(empty($parametros['name']) || empty($parametros['mail']) || empty($parametros['message'])){
+    if(empty($parametros['name']) || empty($parametros['mail']) || empty($parametros['password'])){
         die("Error: Todos los campos son obligatorios.");
     }
 
@@ -18,11 +18,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)){
 
     include './conexion.php';
     try {
-        $sql = "select sp_insertreview(:name, :mail, :message)";
+        $sql = "select sp_insertreview(:name, :mail, :password)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':name', $parametros['name'], PDO::PARAM_STR);
+        $stmt->bindParam(':password', $parametros['password'], PDO::PARAM_STR);
         $stmt->bindParam(':mail', $parametros['mail'], PDO::PARAM_STR);
-        $stmt->bindParam(':message', $parametros['message'], PDO::PARAM_STR);
         $stmt->execute();
 
         $resultado_out = $stmt->fetchColumn();
@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
     include './conexion.php';
     try {
         $sql = "SELECT * from tbl_review 
-        --WHERE STATUS = FALSE 
+        WHERE STATUS = TRUE 
         ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();

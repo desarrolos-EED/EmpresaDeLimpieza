@@ -9,13 +9,14 @@ if(isset($_POST) && !empty($_POST)){
     $stmt->bindParam(':user', $user);
     $stmt->bindParam(':pass', $pass);
     $stmt->execute();
-    $result = $stmt->fetchAll();
-    $login = (count($result) > 0);
-    if($login){
+    $result_user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    header('Content-Type: application/json');
+    $resultado = $result_user[0]['sp_login'];
+    if($resultado === 'True'){
         $_SESSION['user'] = $user;
         header("Location: ../../view/adminDashboard.php");
     } else {
-        header("Location: ../../view/admin.html?error=1");
+        header("Location: ../../view/admin.html?error=Username or password error");
     }
 } else {
     header("Location: ../../index.html");
