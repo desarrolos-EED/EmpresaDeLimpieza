@@ -48,7 +48,6 @@ function obtenerParametros() {
 }
 
 const misParametros = obtenerParametros();
-
 if (misParametros.success) {
     Swal.fire({
         icon: 'success',

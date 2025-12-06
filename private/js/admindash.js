@@ -1,32 +1,19 @@
-function includeHTML(containerId, filePath) {
-  fetch(filePath)
-    .then((response) => response.text())
-    .then((html) => {
-      document.getElementById(containerId).innerHTML = html;
-    });
+function deleteuser(userId) {
+    if (confirm("Are you sure you want to delete this user?")) {
+        window.location.href = `../private/controller/user.php?deleteid=${userId}`;
+    }
 }
 
-// Cargar el header y el footer
-includeHTML("header-container", "../view/partials/header.html");
-includeHTML("footer-container", "../view/partials/footer.html");
+function deletereview(reviewId) {
+    if (confirm("Are you sure you want to delete this review?")) {
+        window.location.href = `../private/controller/user.php?reviewId=${reviewId}`;
+    }
+}
 
-const acordeon = document.getElementsByClassName("contenedor");
-
-for (const item of acordeon) {
-    item.addEventListener("click", function () {
-        if (this.classList.contains("activa")) {
-            // If the clicked element already has "activa", remove it
-            this.classList.remove("activa");
-        } else {
-            // Remove "activa" class from all elements
-            Array.from(acordeon).forEach((el) => el.classList.remove("activa"));
-            // Add "activa" class to the clicked element
-            this.classList.add("activa");
-            this.scrollIntoView({ 
-                //behavior: "smooth", 
-                block: "center" });
-        }
-    });
+function deletegalery(galeryId) {
+    if (confirm("Are you sure you want to delete this galery item?")) {
+        window.location.href = `../private/controller/user.php?galeryId=${galeryId}`;
+    }
 }
 
 // Manejo de mensajes de éxito o error en el envío de reseñas
@@ -66,3 +53,7 @@ if (misParametros.success) {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 }
+
+document.getElementById('Logout').addEventListener('click', function() {
+    window.location.href = '../private/controller/logout.php';
+});
