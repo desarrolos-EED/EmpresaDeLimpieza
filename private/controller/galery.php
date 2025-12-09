@@ -5,8 +5,8 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         $sql = "SELECT * from tbl_imgs where status = true";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $galery = $stmt->get_result();
-        $galery = $galery->fetch_assoc();
+        $result = $stmt->get_result();
+        $galery = $result->fetch_all(MYSQLI_ASSOC);
         header('Content-Type: application/json');
         echo json_encode(['datos' => $galery]);
     } catch (PDOException $e) {

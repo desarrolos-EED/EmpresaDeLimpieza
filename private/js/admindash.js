@@ -35,12 +35,11 @@ function obtenerParametros() {
 }
 
 const misParametros = obtenerParametros();
-
 if (misParametros.success) {
     Swal.fire({
         icon: 'success',
         title: 'Success!',
-        text: 'Your review has been sent successfully.'
+        text: misParametros.success
     });
     window.history.replaceState({}, document.title, window.location.pathname);
 } else {
@@ -48,7 +47,7 @@ if (misParametros.success) {
         Swal.fire({
             icon: 'error',
             title: 'Error!',
-            text: 'There was an error sending your review. Please try again.'
+            text: misParametros.error
         });
         window.history.replaceState({}, document.title, window.location.pathname);
     }

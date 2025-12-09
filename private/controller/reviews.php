@@ -46,8 +46,8 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $reviews = $stmt->get_result();
-        $reviews = $reviews->fetch_assoc();
+        $result = $stmt->get_result();
+        $reviews = $result->fetch_all(MYSQLI_ASSOC);
         header('Content-Type: application/json');
         echo json_encode(['datos' => $reviews]);
     } catch (PDOException $e) {
