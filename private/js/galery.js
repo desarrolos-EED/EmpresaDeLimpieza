@@ -5,9 +5,9 @@ window.addEventListener('load', function() {
         method: 'GET',
         success: function(data) {
             const reviewsContainer = document.getElementById('gallery');
-            const reviews = data; // Assuming data is a JSON string
-
+            const reviews = Object.values(data); // Parse JSON data
             reviews.forEach(review => {
+                console.log(review);
                 const reviewDiv = document.createElement('div');
                 reviewDiv.classList.add('gallery-item');
 

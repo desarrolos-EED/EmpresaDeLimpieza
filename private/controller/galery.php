@@ -5,9 +5,10 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         $sql = "SELECT * from tbl_imgs where status = true";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $galery = $stmt->get_result();
+        $galery = $galery->fetch_assoc();
         header('Content-Type: application/json');
-        echo json_encode($reviews);
+        echo json_encode(['datos' => $galery]);
     } catch (PDOException $e) {
         die("Error al obtener las reseñas: " . $e->getMessage());
     }

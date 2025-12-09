@@ -1,13 +1,13 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)){
     $parametros = array(
-        "name" => isset($_POST['username']) ? trim(filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) : '',
+        "name" => isset($_POST['name']) ? trim(filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) : '',
         "mail" => isset($_POST['email']) ? trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL)) : '',
-        "password" => isset($_POST['password']) ? trim(strip_tags($_POST['password'])) : ''
+        "message" => isset($_POST['message']) ? trim(strip_tags($_POST['message']), FILTER_SANITIZE_FULL_SPECIAL_CHARS) : ''
     );
 
     // Validar que los campos no estén vacíos
-    if(empty($parametros['name']) || empty($parametros['mail']) || empty($parametros['password'])){
+    if(empty($parametros['name']) || empty($parametros['mail']) || empty($parametros['message'])){
         die("Error: Todos los campos son obligatorios.");
     }
 
@@ -18,15 +18,15 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)){
 
     include './conexion.php';
     try {
-        $sql = "select sp_insertreview(:name, :mail, :password)";
+        $sql = "CALL sp_insertreview(?, ?, ?, @output);";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':name', $parametros['name'], PDO::PARAM_STR);
-        $stmt->bindParam(':password', $parametros['password'], PDO::PARAM_STR);
-        $stmt->bindParam(':mail', $parametros['mail'], PDO::PARAM_STR);
+        $stmt->bind_param("sss", $parametros['name'], $parametros['mail'], $parametros['message']);
         $stmt->execute();
 
-        $resultado_out = $stmt->fetchColumn();
-
+        $stmt->close();
+        
+        $resultado = $conn->query("SELECT @output as resultado_out");
+        $resultado_out = $resultado->fetch_assoc()['resultado_out'] ?? null;
         if ($resultado_out && $resultado_out === 'true') {
             header("Location: ../../view/review.html?success=true");
             exit();
@@ -46,9 +46,10 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
         ORDER BY id DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $reviews = $stmt->get_result();
+        $reviews = $reviews->fetch_assoc();
         header('Content-Type: application/json');
-        echo json_encode($reviews);
+        echo json_encode(['datos' => $reviews]);
     } catch (PDOException $e) {
         die("Error al obtener las reseñas: " . $e->getMessage());
     }
