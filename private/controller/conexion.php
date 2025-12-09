@@ -1,23 +1,23 @@
 <?php
-$host = 'localhost';
-$port = '5432'; // Puerto por defecto de PostgreSQL
-$dbname = 'db_ellenclena';
-$user = 'postgres'; // Usuario por defecto
-$password = 'administrador';
+$host = 'srv865.hstgr.io';
+$port = '3306'; // Puerto por defecto de MySQL
 
-// Cadena de conexión DSN (Data Source Name)
-$dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+// Datos confirmados por tu imagen
+$username = "u831665975_dev_ellenclean";     
+$dbname = "u831665975_db_ellenclean";    
 
-try {
-    // Crear una nueva instancia de PDO
-    $conn = new PDO($dsn, $user, $password);
-    
-    // Configuración para reportar errores
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// ¡IMPORTANTE! Asegúrate de que esta sea la contraseña correcta.
+$password = "D3v_Ell3nC7e"; 
 
-} catch (PDOException $e) {
-    // Si la conexión falla, se captura el error
-    die("Error de conexión: " . $e->getMessage());
+// Crear la conexión
+$conn = new mysqli($host, $username, $password, $dbname, $port);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
-//esto se ponfra feo
+
+// echo "¡Conexión a Hostinger BD exitosa!";
+
+// $conn->close();
 ?>

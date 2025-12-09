@@ -21,15 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     include './conexion.php';
     try {
-        $sql = "select sp_insertJobs(:name, :mail, :phone)";
+        $sql = "CALL sp_insertJobs(?, ?, ?, @output);";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':name', $parametros['name'], PDO::PARAM_STR);
-        $stmt->bindParam(':mail', $parametros['mail'], PDO::PARAM_STR);
-        $stmt->bindParam(':phone', $parametros['phone'], PDO::PARAM_STR);
+        $stmt->bind_Param("sss", $parametros['name'], $parametros['mail'], $parametros['phone']);
         $stmt->execute();
 
-        $resultado_out = $stmt->fetchColumn();
+        $stmt->close();
 
+        $resultado = $conn->query("SELECT @output as resultado_out");
+        $resultado_out = $resultado->fetch_assoc()['resultado_out'] ?? null;
         if ($resultado_out && $resultado_out === 'true') {
             header("Location: ../../view/jobs.html?success=true");
             exit();

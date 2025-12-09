@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
         method: 'GET',
         success: function(data) {
             const reviewsContainer = document.getElementById('reviewsContainer');
-            const reviews = data; // Assuming data is a JSON string
-
+            reviewsContainer.innerHTML = ''; // Clear previous reviews
+            
+            const reviews = Object.values(data);
+            
             reviews.forEach(review => {
                 const reviewDiv = document.createElement('div');
                 reviewDiv.classList.add('review');

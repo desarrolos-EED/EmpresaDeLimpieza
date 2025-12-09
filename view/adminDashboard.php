@@ -5,7 +5,7 @@ if (!isset($_SESSION['user'])) {
     header("Location: ../index.html");
     exit();
 }
-include '../private/controller/conexion.php';
+include '../private/controller/conexion.php'; // Asegúrate de que este archivo use MySQL y PDO
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -84,7 +84,7 @@ include '../private/controller/conexion.php';
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
+                                                        data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Save User</button>
                                                 </div>
                                             </form>
@@ -108,26 +108,28 @@ include '../private/controller/conexion.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php
-                                        $sql = 'SELECT * FROM public.tbl_user ORDER BY id_user ASC';
-                                        $stmt = $conn->prepare($sql);
-                                        $stmt->execute();
+                                        $sql = "SELECT * FROM tbl_user ORDER BY id_user ASC";
+                                        if ($stmt = $conn->prepare($sql)) {
+                                            $stmt->execute();
+                                            $resultado_query = $stmt->get_result();
+                                            $stmt->close(); 
+                                            
+                                            if ($resultado_query->num_rows > 0) {
+                                                while ($row = $resultado_query->fetch_assoc()) {
+                                                    echo "<tr>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['id_user']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['name_user']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['mail_user']) . "</td>
+                                                        <td style='text-align: center;'>";
 
-                                        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($resultado as $row) {
-                                            echo "<tr>
-                                                <td style='text-align: center;'>" . htmlspecialchars($row['id_user']) . "</td>
-                                                <td style='text-align: center;'>" . htmlspecialchars($row['name_user']) . "</td>
-                                                <td style='text-align: center;'>" . htmlspecialchars($row['mail_user']) . "</td>
-                                                <td style='text-align: center;'>";
-                                                if($row['id_user'] != 1){
-                                                    echo "<button class='btn btn-sm btn-danger' onclick='deleteuser(". htmlspecialchars($row['id_user']) .")'>Delete</button>";
+                                                    if ($row['id_user'] != 1) {
+                                                        echo "<button class='btn btn-sm btn-danger' onclick='deleteuser(" . htmlspecialchars($row['id_user']) . ")'>Delete</button>";
+                                                    }
+                                                    echo "</td></tr>";
                                                 }
-                                                echo "</td>
-                                                </tr>";
                                             }
-                                            // <button class='btn btn-sm btn-primary'>Edit</button>
+                                        }
                                         ?>
                                     </tbody>
                                 </table>
@@ -150,25 +152,30 @@ include '../private/controller/conexion.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = 'SELECT * FROM tbl_review tr';
-                                        $stmt = $conn->prepare($sql);
-                                        $stmt->execute();
+                                        
+                                        // Reviews
+                                        $sql = 'SELECT * FROM tbl_review'; 
+                                        if ($stmt = $conn->prepare($sql)) {
+                                            $stmt->execute();
+                                            $resultado_view = $stmt->get_result();
+                                            $stmt->close(); 
 
-                                        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($resultado as $row) {
-                                            echo "<tr>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['name']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['message']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['mail']) . "</td>
-                                        <td style='text-align: center;'>";
-                                        if($row['status']){
-                                            echo "<button class='btn btn-sm btn-danger' onclick='deletereview(". htmlspecialchars($row['id']) .")'>Delete</button>";
-                                        }else{
-                                            echo "<button class='btn btn-sm btn-success' onclick='deletereview(" . htmlspecialchars($row['id']) . ")'>Approve</button>";
-                                        }
-                                        echo "</td>
-                                    </tr>";
+                                            if ($resultado_view->num_rows > 0) {
+                                                while ($row = $resultado_view->fetch_assoc()) {
+                                                    echo "<tr>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['name']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['message']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['mail']) . "</td>
+                                                        <td style='text-align: center;'>";
+                                                    if ($row['status']) {
+                                                        echo "<button class='btn btn-sm btn-danger' onclick='deletereview(" . htmlspecialchars($row['id']) . ")'>Delete</button>";
+                                                    } else {
+                                                        echo "<button class='btn btn-sm btn-success' onclick='deletereview(" . htmlspecialchars($row['id']) . ")'>Approve</button>";
+                                                    }
+                                                    echo "</td></tr>";
+                                                }
+                                            } 
                                         }
                                         ?>
                                     </tbody>
@@ -179,26 +186,33 @@ include '../private/controller/conexion.php';
                     <div id="tab-3" class="tab-pane">
                         <div class="panel-body">
                             <!-- listado de galería -->
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addImageModal">Add Image</button>
-                            <div class="modal fade" id="addImageModal" tabindex="-1" role="dialog" aria-labelledby="addImageModalLabel" aria-hidden="true">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addImageModal">Add
+                                Image</button>
+                            <div class="modal fade" id="addImageModal" tabindex="-1" role="dialog"
+                                aria-labelledby="addImageModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="addImageModalLabel">Add New Image</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form id="addImageForm" method="post" action="../private/controller/galery.php" enctype="multipart/form-data">
+                                            <form id="addImageForm" method="post"
+                                                action="../private/controller/galery.php" enctype="multipart/form-data">
                                                 <div class="mb-3">
                                                     <label for="imageTitle" class="form-label">Title</label>
-                                                    <input type="text" class="form-control" id="imageTitle" name="imageTitle" required>
+                                                    <input type="text" class="form-control" id="imageTitle"
+                                                        name="imageTitle" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imageFile" class="form-label">Select Image</label>
-                                                    <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required>
+                                                    <input type="file" class="form-control" id="imageFile"
+                                                        name="imageFile" accept="image/*" required>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Upload Image</button>
                                                 </div>
                                             </form>
@@ -218,28 +232,34 @@ include '../private/controller/conexion.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = 'SELECT * FROM tbl_imgs ti ';
-                                        $stmt = $conn->prepare($sql);
-                                        $stmt->execute();
 
-                                        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($resultado as $row) {
-                                            echo "<tr>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['comments']) . "</td>
-                                        <td style='text-align: center;'> 
-                                        <a href='" . htmlspecialchars($row['path_img']) . "'>
-                                        <img src='" . htmlspecialchars($row['path_img']) . "' alt='" . htmlspecialchars($row['id']) . "' style='width: 150px; height: 150px;'>
-                                        </a>
-                                        </td>
-                                        <td style='text-align: center;'>";
-                                            if($row["status"]){
-                                            echo "<button class='btn btn-sm btn-danger' onclick='deletegalery(". htmlspecialchars($row['id']) .")'>Delete</button>";
-                                            }else{
-                                            echo "<button class='btn btn-sm btn-success' onclick='deletegalery(". htmlspecialchars($row['id']) .")'>Approve</button>";
+                                        // Gallery
+                                        $sql = 'SELECT * FROM tbl_imgs'; 
+                                        if ($stmt = $conn->prepare($sql)) {
+                                            $stmt->execute();
+                                            $resultado_query = $stmt->get_result();
+                                            $stmt->close(); 
+
+                                            if ($resultado_query->num_rows > 0) {
+                                                while ($row = $resultado_query->fetch_assoc()) {
+                                                    echo "<tr>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['comments']) . "</td>
+                                                        <td style='text-align: center;'> 
+                                                        <a href='" . htmlspecialchars($row['path_img']) . "'>
+                                                        <img src='" . htmlspecialchars($row['path_img']) . "' alt='" . htmlspecialchars($row['id']) . "' style='width: 150px; height: 150px;'>
+                                                        </a>
+                                                        </td>
+                                                        <td style='text-align: center;'>";
+
+                                                    if ($row["status"]) {
+                                                        echo "<button class='btn btn-sm btn-danger' onclick='deletegalery(" . htmlspecialchars($row['id']) . ")'>Delete</button>";
+                                                    } else {
+                                                        echo "<button class='btn btn-sm btn-success' onclick='deletegalery(" . htmlspecialchars($row['id']) . ")'>Approve</button>";
+                                                    }
+                                                    echo "</td></tr>";
+                                                }
                                             }
-                                        echo "</td>
-                                    </tr>";
                                         }
                                         ?>
                                     </tbody>
@@ -263,21 +283,27 @@ include '../private/controller/conexion.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = 'SELECT * FROM tbl_jobs tj ';
-                                        $stmt = $conn->prepare($sql);
-                                        $stmt->execute();
 
-                                        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($resultado as $row) {
-                                            echo "<tr>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['name']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['mail']) . "</td>
-                                        <td style='text-align: center;'>" . htmlspecialchars($row['phone']) . "</td>
-                                        </tr>";
-                                    }
-                                    ?>
-                                    <!-- <td style='text-align: center;'>
+                                        // Job offers
+                                        $sql = 'SELECT * FROM tbl_jobs'; 
+                                        if ($stmt = $conn->prepare($sql)) {
+                                            $stmt->execute();
+                                            $resultado_query = $stmt->get_result();
+                                            $stmt->close(); 
+
+                                            if ($resultado_query->num_rows > 0) {
+                                                while ($row = $resultado_query->fetch_assoc()) {
+                                                    echo "<tr>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['id']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['name']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['mail']) . "</td>
+                                                        <td style='text-align: center;'>" . htmlspecialchars($row['phone']) . "</td>
+                                                        </tr>";
+                                                }
+                                            } 
+                                        }
+                                        ?>
+                                        <!-- <td style='text-align: center;'>
                                         <button class='btn btn-sm btn-danger'>Delete</button>
                                     </td> -->
                                     </tbody>
