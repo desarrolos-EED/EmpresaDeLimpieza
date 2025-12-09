@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const reviewsContainer = document.getElementById('reviewsContainer');
             reviewsContainer.innerHTML = ''; // Clear previous reviews
             
-            const reviews = Object.values(data);
-            
+            const reviews = data.datos; // Use data directly as it is an array
             reviews.forEach(review => {
                 const reviewDiv = document.createElement('div');
                 reviewDiv.classList.add('review');

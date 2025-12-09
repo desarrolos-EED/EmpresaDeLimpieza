@@ -5,19 +5,18 @@ window.addEventListener('load', function() {
         method: 'GET',
         success: function(data) {
             const reviewsContainer = document.getElementById('gallery');
-            const reviews = Object.values(data); // Parse JSON data
-            reviews.forEach(review => {
-                console.log(review);
+            const galerys = data.datos; // Parse JSON data
+            galerys.forEach(galery => {
                 const reviewDiv = document.createElement('div');
                 reviewDiv.classList.add('gallery-item');
 
                 const nameElement = document.createElement('img');
-                nameElement.src = review.path_img;
-                nameElement.alt = review.comments;
+                nameElement.src = galery.path_img;
+                nameElement.alt = galery.comments;
 
                 const caption = document.createElement('div');
                 caption.classList.add('caption');
-                caption.textContent = review.comments;
+                caption.textContent = galery.comments;
 
                 reviewDiv.appendChild(nameElement);
                 reviewDiv.appendChild(caption);
